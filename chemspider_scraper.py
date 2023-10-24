@@ -53,7 +53,7 @@ def scrape_chemspider_links():
             # If the SMILE string exists, write it to a file --> separated by <wbr> & spaces, fixed by replacing spaces w empty string
             if smile_string:
                 smiles_text = smile_string.get_text(separator=" ").replace(" ", "")
-                with open('smileStrings.txt', 'a') as f:
+                with open('chemspider_smileStrings.txt', 'a') as f:
                     f.write(smiles_text + '\n')
             else:
                 print("Could not find SMILE string.")
