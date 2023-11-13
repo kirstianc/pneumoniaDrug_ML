@@ -23,6 +23,14 @@ AUTHOR: Ian Chavez
     COMMENT:
         - Created file and added initial organization
         - Base functionaltiy
+
+11/13/23:
+    MOD:     Adjusting functionality
+    AUTHOR:  Ian Chavez
+    COMMENT:
+        - Pulls from 2 txt files: 
+            - working_links.txt = SMILE strings of working compounds
+            - notworking_links.txt = SMILE strings of non-working compounds
 ====================== END OF MODIFICATION HISTORY ============================
 """
 # Imports
