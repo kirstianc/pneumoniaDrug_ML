@@ -10,7 +10,7 @@ The goal of this project is to train a Logistic Regression to identify potential
 Usage of machine learning such as Logistic Regression can help us save time and money in the drug development process.
 
 ## Why Logistic Regression?
-Logistic Regression is a type of machine learning that is used to predict the probability of a categorical dependent variable (the drug molecule). So as a result, we are trying to predict the probability of a drug molecule being used to treat pneumonia. 
+Logistic Regression is a type of machine learning that is used to predict the probability of a categorical dependent variable (in this case, the potential drug molecule). We are trying to predict the probability of a drug molecule being used to treat pneumonia so as a result, Logistic Regression is perfectly suited for this task. 
 
 ### Issues with Logistic Regression...
 Potential problems with Logistic Regression is that it is prone to overfitting. This means that the model will be too specific to the training data and will not be able to generalize well to new data. Given that we are using a relatively small dataset, this may be a problem.

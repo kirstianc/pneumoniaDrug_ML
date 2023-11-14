@@ -59,11 +59,12 @@ def save_to_files(list_working, list_notworking):
             f.write("%s\n" % item)
 
 if __name__ == '__main__':
+    print("---- Starting GoogleSheet_scraper.py ----")
     
-    print("Starting...")
+    print("Accessing Google Sheets...")
     list_working, list_notworking = access_sheet()
     
     print("Saving to files...")
     save_to_files(list_working, list_notworking)
     
-    print("Done.")
+    print("---- Finished with GoogleSheet_scraper.py ----\n")

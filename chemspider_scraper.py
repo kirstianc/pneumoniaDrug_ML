@@ -1,5 +1,5 @@
 # coding: utf-8
-#NAME:  chemspider_scraper.py
+#NAME:  Chemspider_scraper.py
 #DESCRIPTION: This python script will scrape SMILE strings from ChemSpider and save them to a file.
 
 """
@@ -37,19 +37,24 @@ AUTHOR: Ian Chavez
 import requests
 from bs4 import BeautifulSoup
 import time
+import certifi
 
-# Links to scrape, obtained from chemspiderLinks.txt
-list_of_cslinks = []
+# List of links to scrape
+list_working = []
+list_notworking = []
 
-def obtain_chemspider_links():
-    with open('chemspiderLinks.txt', 'r') as f:
+def obtain_chemspider_links(file_name: str, list_of_cslinks: list):
+    with open(file_name, 'r') as f:
         for line in f:
-            list_of_cslinks.append(line.strip())
+            list_of_cslinks.append(line.strip()[2:-2])
+    return list_of_cslinks
 
 
-def scrape_chemspider_links():
+def scrape_chemspider_links(working: bool, list_of_cslinks: list):
+
     for link in list_of_cslinks:
-        response = requests.get(link, verify=False)
+        cert_path = certifi.where()
+        response = requests.get(link, verify=cert_path)
 
         # If success
         if response.status_code == 200:
@@ -61,20 +66,46 @@ def scrape_chemspider_links():
             # If the SMILE string exists, write it to a file --> separated by <wbr> & spaces, fixed by replacing spaces w empty string
             if smile_string:
                 smiles_text = smile_string.get_text(separator=" ").replace(" ", "")
-                with open('chemspider_smileStrings.txt', 'a') as f:
-                    f.write(smiles_text + '\n')
+                
+                if working:
+                    # Working is denoted by first char = 'w'
+                    with open('working_smiles.txt', 'a') as f:
+                        f.write('w'+ smiles_text + '\n')
+                else:
+                    # Not working is denoted by first char = 'f'
+                    with open('notworking_smiles.txt', 'a') as f:
+                        f.write('f' + smiles_text + '\n')
+                
             else:
                 print("Could not find SMILE string.")
                 break # Break out because SMILE string not found --> prevents future error
         else:
             print(f"Failed to retrieve data. Status code: {response.status_code}")
 
-        # Sleep for 1 second to prevent overloading the server
-        time.sleep(1)
+        # Sleep for .5 seconds to prevent overloading the server
+        time.sleep(.5)
 
 if __name__ == '__main__':
-    print("Obtaining ChemSpider links...")
-    obtain_chemspider_links()
-    print("Scraping ChemSpider links...")
-    scrape_chemspider_links()
-    print("Done.")
+    print("---- Starting Chemspider_scraper.py ----")
+    
+    print("Obtaining Working ChemSpider links...")
+    list_working = obtain_chemspider_links('working_links.txt', list_working)
+    
+    # Create/Clear Working file
+    with open('working_smiles.txt', 'w'):
+        pass
+    
+    print("Scraping Working SMILE data...")
+    scrape_chemspider_links(True, list_working)
+    
+    print("Obtaining Not Working ChemSpider links...")
+    list_notworking = obtain_chemspider_links('notworking_links.txt', list_notworking)
+    
+    # Create/Clear Not Working file
+    with open('notworking_smiles.txt', 'w'):
+        pass
+    
+    print("Scraping Not Working SMILE data...")
+    scrape_chemspider_links(False, list_notworking)
+    
+    print("---- Finished with Chemspider_scraper.py ----\n")

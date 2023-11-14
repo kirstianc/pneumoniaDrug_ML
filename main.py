@@ -24,15 +24,9 @@ AUTHOR: Ian Chavez
         - Runs Python files in order
 ====================== END OF MODIFICATION HISTORY ============================
 """
-# Imports
-
 if __name__ == '__main__':
     
     print("===== Starting pneuomoniaDrug_ML =====")
-    
-    print("Running GoogleSheet_scraper.py...")
     exec(open('GoogleSheet_scraper.py').read())
-    print("Running chemspider_scraper.py...")
-    exec(open('chemspider_scraper.py').read())
-    
+    exec(open('Chemspider_scraper.py').read())
     print("===== Done =====")
