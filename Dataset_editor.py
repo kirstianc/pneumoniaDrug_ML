@@ -41,6 +41,13 @@ def obtain_data():
 
 def create_datasets(working_data, notworking_data):
     # training 70%, validation 15%, testing 15%
+    # working data starts w '1', notworking data starts w 'f'
+    # shuffle data
+    # create training dataset
+    # create validation dataset
+    # create testing dataset
+    # save datasets to txt files
+    return 0
 
 
 if __name__ == '__main__':
