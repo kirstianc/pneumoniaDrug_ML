@@ -25,6 +25,12 @@ AUTHOR: Ian Chavez
         - Creates 2 txt files: 
             - working_links.txt = SMILE strings of working compounds
             - notworking_links.txt = SMILE strings of non-working compounds
+11/14/23:
+    MOD:     Edit main function
+    AUTHOR:  Ian Chavez
+    COMMENT:
+        - Added creating/clearing of working_links.txt and notworking_links.txt
+            to prevent appending to existing files
 ====================== END OF MODIFICATION HISTORY ============================
 """
 # Imports
@@ -60,10 +66,16 @@ def save_to_files(list_working, list_notworking):
 
 if __name__ == '__main__':
     print("---- Starting GoogleSheet_scraper.py ----")
-    
+
     print("Accessing Google Sheets...")
     list_working, list_notworking = access_sheet()
-    
+
+    # Create/Clear Working file
+    with open('working_links.txt', 'w'):
+        pass
+    with open('notworking_links.txt', 'w'):
+        pass
+
     print("Saving to files...")
     save_to_files(list_working, list_notworking)
     
