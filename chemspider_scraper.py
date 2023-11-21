@@ -23,7 +23,6 @@ AUTHOR: Ian Chavez
     COMMENT:
         - Created file and added initial organization
         - Base functionaltiy
-
 11/13/23:
     MOD:     Adjusting functionality
     AUTHOR:  Ian Chavez
@@ -31,6 +30,12 @@ AUTHOR: Ian Chavez
         - Pulls from 2 txt files: 
             - working_links.txt = SMILE strings of working compounds
             - notworking_links.txt = SMILE strings of non-working compounds
+11/21/23:
+    MOD:    Edit to improve CSV saving + timing
+    AUTHOR: Ian Chavez
+    COMMENT:
+        - adjusted to not have w or f
+        - adjusted timing to .25 seconds from .5 seconds
 ====================== END OF MODIFICATION HISTORY ============================
 """
 # Imports
@@ -68,13 +73,11 @@ def scrape_chemspider_links(working: bool, list_of_cslinks: list):
                 smiles_text = smile_string.get_text(separator=" ").replace(" ", "")
                 
                 if working:
-                    # Working is denoted by first char = 'w'
                     with open('working_smiles.txt', 'a') as f:
-                        f.write('w'+ smiles_text + '\n')
+                        f.write(smiles_text + '\n')
                 else:
-                    # Not working is denoted by first char = 'f'
                     with open('notworking_smiles.txt', 'a') as f:
-                        f.write('f' + smiles_text + '\n')
+                        f.write(smiles_text + '\n')
                 
             else:
                 print("Could not find SMILE string.")
@@ -82,8 +85,8 @@ def scrape_chemspider_links(working: bool, list_of_cslinks: list):
         else:
             print(f"Failed to retrieve data. Status code: {response.status_code}")
 
-        # Sleep for .5 seconds to prevent overloading the server
-        time.sleep(.5)
+        # Sleep for .25 seconds to prevent overloading the server
+        time.sleep(.25)
 
 if __name__ == '__main__':
     print("---- Starting Chemspider_scraper.py ----")

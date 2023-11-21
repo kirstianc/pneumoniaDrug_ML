@@ -29,7 +29,7 @@ if __name__ == '__main__':
     print("===== Starting pneuomoniaDrug_ML =====")
     exec(open('GoogleSheet_scraper.py').read())
     exec(open('Chemspider_scraper.py').read())
-    # Create datasets using the Chemspider data -> training, validation, testing
+    exec(open('Dataset_editor.py').read())
     # Train model using training dataset
     # Validate model using validation dataset
     # Test model using testing dataset

@@ -25,11 +25,20 @@ AUTHOR: Ian Chavez
             - Training dataset
             - Validation dataset
             - Testing dataset
+11/21/23:
+    MOD:     Edit to utilize CSV instead of text files
+    AUTHOR: Ian Chavez
+    COMMENT:
+        - additionally added checks if file exists to reduce wait time
 ====================== END OF MODIFICATION HISTORY ============================
 """
+import os
+import pandas as pd
+from sklearn.model_selection import train_test_split
 
 working_data = []
 notworking_data = []
+path_to_dataset = 'datasets/'
 
 def obtain_data():
     # Obtain working and not working SMILES data from txt files
@@ -40,21 +49,46 @@ def obtain_data():
     return working_data, notworking_data
 
 def create_datasets(working_data, notworking_data):
-    # training 70%, validation 15%, testing 15%
-    # working data starts w '1', notworking data starts w 'f'
-    # shuffle data
-    # create training dataset
-    # create validation dataset
-    # create testing dataset
-    # save datasets to txt files
-    return 0
+    # Create dataset folder if it doesn't exist
+    if not os.path.exists(path_to_dataset):
+        os.makedirs(path_to_dataset)
+    
+    # Create combination dataset with corresponding amount of labels
+    all_data = working_data + notworking_data
+    labels = ['working'] * len(working_data) + ['not working'] * len(notworking_data)
+
+    # Split data into training (70%), validation and testing (30% total = 15% each)
+    X_train, X_temp, y_train, y_temp = train_test_split(all_data, labels, test_size=0.3, random_state=42)
+    # Split data into validation (50%) and testing (50%) --> 50% of 30% = 15% 
+    X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42)
+
+    # Create DataFrames for training, validation, and testing
+    train_df = pd.DataFrame({'SMILES': X_train, 'CLASS': y_train})
+    val_df = pd.DataFrame({'SMILES': X_val, 'CLASS': y_val})
+    test_df = pd.DataFrame({'SMILES': X_test, 'CLASS': y_test})
+
+    # Save datasets to CSV files in datasets folder
+    print("Saving training dataset to CSV file...")
+    train_df.to_csv(os.path.join(path_to_dataset, 'training_dataset.csv'), index=False)
+    print("Saving validation dataset to CSV file...")
+    val_df.to_csv(os.path.join(path_to_dataset, 'validation_dataset.csv'), index=False)
+    print("Saving testing dataset to CSV file...")
+    test_df.to_csv(os.path.join(path_to_dataset, 'testing_dataset.csv'), index=False)
+
+    return train_df, val_df, test_df
+
 
 
 if __name__ == '__main__':
     
     print("---- Starting Dataset_editor.py ----")
 
+    print("Obtaining data...")
     # Obtain working and not working SMILES data from txt files
     working_data, notworking_data = obtain_data()
+    
+    print("Creating datasets...")
+    # Create combination dataset with corresponding amount of labels
+    train_df, val_df, test_df = create_datasets(working_data, notworking_data)
 
     print("---- Finished with Dataset_editor.py ----")
