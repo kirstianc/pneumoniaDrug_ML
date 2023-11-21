@@ -25,4 +25,5 @@ The dataset is split into 3 parts: training, validation, and testing. As the nam
 
 ## Running program
 `pip3 install -r requirements.txt`
+
 `python3 main.py`

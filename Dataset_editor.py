@@ -26,7 +26,7 @@ AUTHOR: Ian Chavez
             - Validation dataset
             - Testing dataset
 11/21/23:
-    MOD:     
+    MOD:     Improve save and directory structure
     AUTHOR: Ian Chavez
     COMMENT:
         - Edit to utilize CSV instead of text files
@@ -61,7 +61,7 @@ def create_datasets(working_data, notworking_data):
     
     # Create combination dataset with corresponding amount of labels
     all_data = working_data + notworking_data
-    labels = ['working'] * len(working_data) + ['not working'] * len(notworking_data)
+    labels = ['1'] * len(working_data) + ['0'] * len(notworking_data)
 
     # Split data into training (70%), validation and testing (30% total = 15% each)
     X_train, X_temp, y_train, y_temp = train_test_split(all_data, labels, test_size=0.3, random_state=42)

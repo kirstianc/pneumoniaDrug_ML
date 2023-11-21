@@ -30,7 +30,7 @@ if __name__ == '__main__':
     exec(open('scrapers/GoogleSheet_scraper.py').read())
     exec(open('scrapers/Chemspider_scraper.py').read())
     exec(open('Dataset_editor.py').read())
-    # Train model using training dataset
+    exec(open('Train_LRmodel.py').read())
     # Validate model using validation dataset
     # Test model using testing dataset
     # Save model and performance to text file for later use
