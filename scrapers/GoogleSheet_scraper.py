@@ -31,14 +31,24 @@ AUTHOR: Ian Chavez
     COMMENT:
         - Added creating/clearing of working_links.txt and notworking_links.txt
             to prevent appending to existing files
+11/21/23:
+    MOD: Edit to improve saving to files
+    AUTHOR: Ian Chavez
+    COMMENT:
+        - Creates txt directory if it doesn't exist
+        - Changed file save to improve directory structure
 ====================== END OF MODIFICATION HISTORY ============================
 """
 # Imports
+import os
 import gspread
 
 # List of links to scrape, obtained from Google Sheets
 list_working = []
 list_notworking = []
+working_file = 'txt/working_links.txt'
+notworking_file = 'txt/notworking_links.txt'
+
 
 def access_sheet():
     gc = gspread.service_account()
@@ -56,11 +66,11 @@ def access_sheet():
     
 def save_to_files(list_working, list_notworking):
     # Save lists to files
-    with open('working_links.txt', 'w') as f:
+    with open(working_file, 'w') as f:
         for item in list_working:
             f.write("%s\n" % item)
     
-    with open('notworking_links.txt', 'w') as f:
+    with open(notworking_file, 'w') as f:
         for item in list_notworking:
             f.write("%s\n" % item)
 
@@ -70,10 +80,14 @@ if __name__ == '__main__':
     print("Accessing Google Sheets...")
     list_working, list_notworking = access_sheet()
 
+    # Create txt folder if it doesn't exist
+    if not os.path.exists('txt'):
+        os.makedirs('txt')
+
     # Create/Clear Working file
-    with open('working_links.txt', 'w'):
+    with open(working_file, 'w'):
         pass
-    with open('notworking_links.txt', 'w'):
+    with open(notworking_file, 'w'):
         pass
 
     print("Saving to files...")

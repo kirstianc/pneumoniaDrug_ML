@@ -34,11 +34,13 @@ AUTHOR: Ian Chavez
     MOD:    Edit to improve CSV saving + timing
     AUTHOR: Ian Chavez
     COMMENT:
-        - adjusted to not have w or f
-        - adjusted timing to .25 seconds from .5 seconds
+        - Adjusted to not have w or f
+        - Adjusted timing to .25 seconds from .5 seconds
+        - Changed file save to improve directory structure
 ====================== END OF MODIFICATION HISTORY ============================
 """
 # Imports
+import os
 import requests
 from bs4 import BeautifulSoup
 import time
@@ -47,6 +49,11 @@ import certifi
 # List of links to scrape
 list_working = []
 list_notworking = []
+workinglink_file = 'txt/working_links.txt'
+notworkinglink_file = 'txt/notworking_links.txt'
+working_file = 'txt/working_smiles.txt'
+notworking_file = 'txt/notworking_smiles.txt'
+
 
 def obtain_chemspider_links(file_name: str, list_of_cslinks: list):
     with open(file_name, 'r') as f:
@@ -73,10 +80,10 @@ def scrape_chemspider_links(working: bool, list_of_cslinks: list):
                 smiles_text = smile_string.get_text(separator=" ").replace(" ", "")
                 
                 if working:
-                    with open('working_smiles.txt', 'a') as f:
+                    with open(working_file, 'a') as f:
                         f.write(smiles_text + '\n')
                 else:
-                    with open('notworking_smiles.txt', 'a') as f:
+                    with open(notworking_file, 'a') as f:
                         f.write(smiles_text + '\n')
                 
             else:
@@ -92,20 +99,20 @@ if __name__ == '__main__':
     print("---- Starting Chemspider_scraper.py ----")
     
     print("Obtaining Working ChemSpider links...")
-    list_working = obtain_chemspider_links('working_links.txt', list_working)
+    list_working = obtain_chemspider_links(workinglink_file, list_working)
     
     # Create/Clear Working file
-    with open('working_smiles.txt', 'w'):
+    with open(working_file, 'w'):
         pass
     
     print("Scraping Working SMILE data...")
     scrape_chemspider_links(True, list_working)
     
     print("Obtaining Not Working ChemSpider links...")
-    list_notworking = obtain_chemspider_links('notworking_links.txt', list_notworking)
+    list_notworking = obtain_chemspider_links(notworkinglink_file, list_notworking)
     
     # Create/Clear Not Working file
-    with open('notworking_smiles.txt', 'w'):
+    with open(notworking_file, 'w'):
         pass
     
     print("Scraping Not Working SMILE data...")

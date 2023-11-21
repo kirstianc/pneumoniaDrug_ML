@@ -26,10 +26,12 @@ AUTHOR: Ian Chavez
             - Validation dataset
             - Testing dataset
 11/21/23:
-    MOD:     Edit to utilize CSV instead of text files
+    MOD:     
     AUTHOR: Ian Chavez
     COMMENT:
-        - additionally added checks if file exists to reduce wait time
+        - Edit to utilize CSV instead of text files
+        - Changed file save to improve directory structure
+            - Creates datasets folder if it doesn't exist
 ====================== END OF MODIFICATION HISTORY ============================
 """
 import os
@@ -38,20 +40,24 @@ from sklearn.model_selection import train_test_split
 
 working_data = []
 notworking_data = []
-path_to_dataset = 'datasets/'
 
 def obtain_data():
     # Obtain working and not working SMILES data from txt files
-    with open('working_smiles.txt', 'r') as f:
+    with open('txt/working_smiles.txt', 'r') as f:
         working_data = f.readlines()
-    with open('notworking_smiles.txt', 'r') as f:
+    with open('txt/notworking_smiles.txt', 'r') as f:
         notworking_data = f.readlines()
+        
+    # Remove \n from strings
+    working_data = [x.strip() for x in working_data]
+    notworking_data = [x.strip() for x in notworking_data]
+    
     return working_data, notworking_data
 
 def create_datasets(working_data, notworking_data):
     # Create dataset folder if it doesn't exist
-    if not os.path.exists(path_to_dataset):
-        os.makedirs(path_to_dataset)
+    if not os.path.exists('datasets'):
+        os.makedirs('datasets')
     
     # Create combination dataset with corresponding amount of labels
     all_data = working_data + notworking_data
@@ -69,11 +75,11 @@ def create_datasets(working_data, notworking_data):
 
     # Save datasets to CSV files in datasets folder
     print("Saving training dataset to CSV file...")
-    train_df.to_csv(os.path.join(path_to_dataset, 'training_dataset.csv'), index=False)
+    train_df.to_csv('datasets/training_dataset.csv', index=False)
     print("Saving validation dataset to CSV file...")
-    val_df.to_csv(os.path.join(path_to_dataset, 'validation_dataset.csv'), index=False)
+    val_df.to_csv('datasets/validation_dataset.csv', index=False)
     print("Saving testing dataset to CSV file...")
-    test_df.to_csv(os.path.join(path_to_dataset, 'testing_dataset.csv'), index=False)
+    test_df.to_csv('datasets/testing_dataset.csv', index=False)
 
     return train_df, val_df, test_df
 

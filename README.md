@@ -24,4 +24,5 @@ We obtain the SMILES information from the ChemSpider database found here: https:
 The dataset is split into 3 parts: training, validation, and testing. As the names entail: the training dataset will be used to train the model, the validation dataset will be used to validate the model, and the testing dataset will be used to test the model.
 
 ## Running program
-pip install -r requirements.txt
+pip3 install -r requirements.txt
+python3 main.py

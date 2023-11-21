@@ -27,8 +27,8 @@ AUTHOR: Ian Chavez
 if __name__ == '__main__':
     
     print("===== Starting pneuomoniaDrug_ML =====")
-    exec(open('GoogleSheet_scraper.py').read())
-    exec(open('Chemspider_scraper.py').read())
+    exec(open('scrapers/GoogleSheet_scraper.py').read())
+    exec(open('scrapers/Chemspider_scraper.py').read())
     exec(open('Dataset_editor.py').read())
     # Train model using training dataset
     # Validate model using validation dataset
