@@ -31,7 +31,7 @@ if __name__ == '__main__':
     exec(open('scrapers/Chemspider_scraper.py').read())
     exec(open('Dataset_editor.py').read())
     exec(open('Train_LRmodel.py').read())
-    # Validate model using validation dataset
+    exec(open('Validate_LRmodel.py').read())
     # Test model using testing dataset
     # Save model and performance to text file for later use
     print("===== Done =====")

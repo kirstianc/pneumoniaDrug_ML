@@ -1,6 +1,7 @@
 # coding: utf-8
-#NAME:  Train_LRmodel.py
-#DESCRIPTION: This python script will train a logistic regression model utilizing the training data found in 'datasets/training_dataset.csv'.
+#NAME:  Validate_LRmodel.py
+#DESCRIPTION: This Python script is designed to validate the performance of a logistic regression model using the validation dataset. 
+# The validation data is sourced from 'datasets/validation_dataset.csv'
 
 """
 AUTHOR: Ian Chavez
@@ -29,46 +30,38 @@ AUTHOR: Ian Chavez
 import os
 import pandas as pd
 import pickle
-from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_recall_fscore_support
 
-print('---- Starting Train_LRmodel.py ----')
+print('---- Starting Validate_LRmodel.py ----')
 # Import datasets
 print('Importing datasets...')
-training_dataset = pd.read_csv('datasets/training_dataset.csv')
+validation_dataset = pd.read_csv('datasets/validation_dataset.csv')
 
 # Split into X and y
 print('Splitting into X and y...')
-smiles_data = training_dataset.iloc[:, :-1].values.ravel().astype(str)  # Convert numpy array to list of strings
+smiles_data = validation_dataset.iloc[:, :-1].values.ravel().astype(str)  # Convert numpy array to list of strings
 vectorizer = CountVectorizer()
 X_train = vectorizer.fit_transform(smiles_data)
-y_train = training_dataset.iloc[:, -1].values
+y_train = validation_dataset.iloc[:, -1].values
 
-# Train model
-print('Training model...')
-classifier = LogisticRegression(random_state = 0)
-classifier.fit(X_train, y_train)
+print('Loading model...')
+classifier = pickle.load(open('models/LRmodel.pkl', 'rb'))
 
-# Save model
-print('Saving model...')
-if not os.path.exists('models'):
-    os.makedirs('models')
-pickle.dump(classifier, open('models/LRmodel.pkl','wb'))
+# Validate model
+print('Validating model...')
+y_pred = classifier.predict(X_train)
 
 # Save performance
-from sklearn.metrics import confusion_matrix, accuracy_score, precision_recall_fscore_support
-y_pred = classifier.predict(X_train)
-cm = confusion_matrix(y_train, y_pred)
-
+print('Saving performance...')
 if not os.path.exists('performance'):
     os.makedirs('performance')
-with open('performance/LRmodel_training_performance.txt', 'w') as f:
+with open('performance/validation_performance.txt', 'w') as f:
     f.write('Confusion Matrix:\n')
-    f.write(str(cm))
-    f.write('\nAccuracy Score: ')
-    f.write(str(accuracy_score(y_train, y_pred)))
-    f.write('\n')
-    f.write('Precision, Recall, F1 Score, Support:\n')
-    f.write(str(precision_recall_fscore_support(y_train, y_pred, average='weighted')))
-
-print('---- Finished with Train_LRmodel.py ----')
+    f.write(str(confusion_matrix(y_train, y_pred)) + '\n')
+    f.write('Accuracy:\n')
+    f.write(str(accuracy_score(y_train, y_pred)) + '\n')
+    f.write('Precision, Recall, F1:\n')
+    f.write(str(precision_recall_fscore_support(y_train, y_pred, average='binary')) + '\n')
+    
+print('---- Finished with Validate_LRmodel.py ----')
