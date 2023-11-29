@@ -1,6 +1,6 @@
 # coding: utf-8
-#NAME:  GoogleSheet_scraper.py
-#DESCRIPTION: This python script will scrape ChemSpider links from Google Sheets.
+# NAME:  GoogleSheet_scraper.py
+# DESCRIPTION: This python script will scrape ChemSpider links from Google Sheets.
 
 """
 AUTHOR: Ian Chavez
@@ -22,16 +22,27 @@ AUTHOR: Ian Chavez
     AUTHOR:  Ian Chavez
     COMMENT:
         - Runs Python files in order
+11/28/23:
+    MOD:     Add input to use either Google Sheets or txt files
+    AUTHOR:  Ian Chavez
+    COMMENT:
+        - Title
 ====================== END OF MODIFICATION HISTORY ============================
 """
-if __name__ == '__main__':
-    
+if __name__ == "__main__":
     print("===== Starting pneuomoniaDrug_ML =====")
-    exec(open('scrapers/GoogleSheet_scraper.py').read())
-    exec(open('scrapers/Chemspider_scraper.py').read())
-    exec(open('Dataset_editor.py').read())
-    exec(open('Train_LRmodel.py').read())
-    exec(open('Validate_LRmodel.py').read())
+
+    # Take input from user to use either Google Sheets or txt files
+    google = input("Use Google Sheets? (y/n): ")
+    if google == "y" or google == "Y" or google == "yes" or google == "Yes":
+        exec(open("scrapers/GoogleSheet_scraper.py").read())
+    else:
+        print("Using txt files in /scrapers/txt/ directory")
+
+    exec(open("scrapers/Chemspider_scraper.py").read())
+    exec(open("Dataset_editor.py").read())
+    exec(open("Train_LRmodel.py").read())
+    exec(open("Validate_LRmodel.py").read())
     # Test model using testing dataset
-    # Save model and performance to text file for later use
+    # Save model and performance to text file
     print("===== Done =====")

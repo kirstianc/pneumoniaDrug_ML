@@ -1,6 +1,6 @@
 # coding: utf-8
-#NAME:  Train_LRmodel.py
-#DESCRIPTION: This python script will train a logistic regression model utilizing the training data found in 'datasets/training_dataset.csv'.
+# NAME:  Train_LRmodel.py
+# DESCRIPTION: This python script will train a logistic regression model utilizing the training data found in 'datasets/training_dataset.csv'.
 
 """
 AUTHOR: Ian Chavez
@@ -32,43 +32,48 @@ import pickle
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import CountVectorizer
 
-print('---- Starting Train_LRmodel.py ----')
+print("---- Starting Train_LRmodel.py ----")
 # Import datasets
-print('Importing datasets...')
-training_dataset = pd.read_csv('datasets/training_dataset.csv')
+print("Importing datasets...")
+training_dataset = pd.read_csv("datasets/training_dataset.csv")
 
 # Split into X and y
-print('Splitting into X and y...')
-smiles_data = training_dataset.iloc[:, :-1].values.ravel().astype(str)  # Convert numpy array to list of strings
+print("Splitting into X and y...")
+smiles_data = training_dataset.iloc[:, :-1].values.ravel().astype(str)
 vectorizer = CountVectorizer()
 X_train = vectorizer.fit_transform(smiles_data)
 y_train = training_dataset.iloc[:, -1].values
 
 # Train model
-print('Training model...')
-classifier = LogisticRegression(random_state = 0)
+print("Training model...")
+classifier = LogisticRegression(random_state=0)
 classifier.fit(X_train, y_train)
 
 # Save model
-print('Saving model...')
-if not os.path.exists('models'):
-    os.makedirs('models')
-pickle.dump(classifier, open('models/LRmodel.pkl','wb'))
+print("Saving model...")
+if not os.path.exists("models"):
+    os.makedirs("models")
+pickle.dump(classifier, open("models/LRmodel.pkl", "wb"))
 
 # Save performance
-from sklearn.metrics import confusion_matrix, accuracy_score, precision_recall_fscore_support
+from sklearn.metrics import (
+    confusion_matrix,
+    accuracy_score,
+    precision_recall_fscore_support,
+)
+
 y_pred = classifier.predict(X_train)
 cm = confusion_matrix(y_train, y_pred)
 
-if not os.path.exists('performance'):
-    os.makedirs('performance')
-with open('performance/LRmodel_training_performance.txt', 'w') as f:
-    f.write('Confusion Matrix:\n')
+if not os.path.exists("performance"):
+    os.makedirs("performance")
+with open("performance/LRmodel_training_performance.txt", "w") as f:
+    f.write("Confusion Matrix:\n")
     f.write(str(cm))
-    f.write('\nAccuracy Score: ')
+    f.write("\nAccuracy Score: ")
     f.write(str(accuracy_score(y_train, y_pred)))
-    f.write('\n')
-    f.write('Precision, Recall, F1 Score, Support:\n')
-    f.write(str(precision_recall_fscore_support(y_train, y_pred, average='weighted')))
+    f.write("\n")
+    f.write("Precision, Recall, F1 Score, Support:\n")
+    f.write(str(precision_recall_fscore_support(y_train, y_pred, average="weighted")))
 
-print('---- Finished with Train_LRmodel.py ----')
+print("---- Finished with Train_LRmodel.py ----")
