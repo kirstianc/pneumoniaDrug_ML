@@ -37,7 +37,7 @@ if __name__ == "__main__":
     if google == "y" or google == "Y" or google == "yes" or google == "Yes":
         exec(open("scrapers/GoogleSheet_scraper.py").read())
     else:
-        print("Using txt files in /scrapers/txt/ directory")
+        print("Using txt files in /txt/ directory")
 
     exec(open("scrapers/Chemspider_scraper.py").read())
     exec(open("Dataset_editor.py").read())
