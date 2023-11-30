@@ -39,7 +39,13 @@ if __name__ == "__main__":
     else:
         print("Using txt files in /txt/ directory")
 
-    exec(open("scrapers/Chemspider_scraper.py").read())
+    # Take input from user to scrape links or not
+    scrape = input("Scrape links? (y/n): ")
+    if scrape == "y" or scrape == "Y" or scrape == "yes" or scrape == "Yes":
+        exec(open("scrapers/Chemspider_scraper.py").read())
+    else:
+        print("Assuming links are already scraped in /txt/ directory")
+        
     exec(open("Dataset_editor.py").read())
     exec(open("Train_LRmodel.py").read())
     exec(open("Validate_LRmodel.py").read())

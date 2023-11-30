@@ -31,8 +31,10 @@ import pandas as pd
 import pickle
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_recall_fscore_support
 
 print("---- Starting Train_LRmodel.py ----")
+
 # Import datasets
 print("Importing datasets...")
 training_dataset = pd.read_csv("datasets/training_dataset.csv")
@@ -55,13 +57,12 @@ if not os.path.exists("models"):
     os.makedirs("models")
 pickle.dump(classifier, open("models/LRmodel.pkl", "wb"))
 
-# Save performance
-from sklearn.metrics import (
-    confusion_matrix,
-    accuracy_score,
-    precision_recall_fscore_support,
-)
+# Save vectorizer
+print("Saving vectorizer...")
+pickle.dump(vectorizer, open("models/vectorizer.pkl", "wb"))  # Save the vectorizer
 
+# Save performance
+print("Saving performance...")
 y_pred = classifier.predict(X_train)
 cm = confusion_matrix(y_train, y_pred)
 

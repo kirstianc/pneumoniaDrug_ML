@@ -4,3 +4,11 @@ CC[C@@H]1[C@@]([C@@H]([C@H](N(C[C@@H](C[C@@]([C@@H]([C@H]([C@@H]([C@H](C(=O)O1)C
 CC[C@@H]1[C@@]2([C@@H]([C@H](C(=O)[C@@H](C[C@@]([C@@H]([C@H](C(=O)[C@](C(=O)O1)(C)F)C)O[C@H]3[C@@H]([C@H](C[C@H](O3)C)N(C)C)O)(C)OC)C)C)N(C(=O)O2)CCCCn4cc(nn4)c5cccc(c5)N)C
 CC(C)(C)CNCc1cc(c2c(c1O)C(=O)C3=C([C@]4([C@@H](C[C@@H]3C2)[C@@H](C(=C(C4=O)C(=O)N)O)N(C)C)O)O)N(C)C
 CC(C)(C)CNCc1cc(c2c(c1O)C(=C3[C@@H](C2)C[C@H]4[C@@H](C(=O)C(=C([C@]4(C3=O)O)O)C(=N)O)N(C)C)O)N(C)C
+C1CNC[C@@H]1N2CC/C(=C\C3=C(N4[C@@H]([C@@H](C4=O)NC(=O)/C(=N\O)/c5nc(sn5)N)SC3)C(=O)O)/C2=O
+O=C4N3/C(=C(/C=C2/C(=O)N([C@@H]1CCNC1)CC2)CS[C@@H]3[C@@H]4NC(=O)C(\N=O)=C5/N=C(\SN5)N)C(=O)O
+C1CNC[C@@H]1N2CC/C(=C\C3=C(N4[C@@H]([C@@H](C4=O)NC(=O)/C(=C/5\NSC(=N5)N)/N=O)SC3)C(=O)O)/C2=O
+C1CNC[C@@H]1N2CC/C(=C\C3=C(N4[C@@H]([C@@H](C4=O)NC(=O)/C(=N/O)/c5nc(sn5)N)SC3)C(=O)O)/C2=O
+CCO/N=C(/c1nc(sn1)N)\C(=O)NC2C3N(C2=O)C(=C(CS3)Sc4nc(cs4)c5cc[n+](cc5)C)C(=O)[O-]
+CCO/N=C(/c1nc(sn1)N)\C(=O)N[C@H]2[C@@H]3N(C2=O)C(=C(CS3)Sc4nc(cs4)c5cc[n+](cc5)C)C(=O)[O-]
+C[C@@H]1CC[C@@]23CCC(=O)[C@H]2[C@@]1([C@@H](C[C@@]([C@H]([C@@H]3C)O)(C)C=C)OC(=O)CS[C@@H]4CC[C@H](C[C@H]4O)N)C
+CC[C@H]1CN2CC[C@H]1C[C@H]2[C@@H](c3ccnc4c3cc(cc4)OCC)O
