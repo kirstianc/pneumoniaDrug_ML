@@ -3,7 +3,7 @@
 # DESCRIPTION: This python script will scrape ChemSpider links from Google Sheets.
 
 """
-AUTHOR: Ian Chavez
+AUTHOR: Ian Chavez & Shivam Amin
 
    Unpublished-rights reserved under the copyright laws of the United States.
 
@@ -13,7 +13,7 @@ AUTHOR: Ian Chavez
    the restrictions set forth in the License Agreement under which it has been
    distributed.
 
-      Unpublished Copyright © 2023 Leonard P. Wesley and Ian Chavez
+      Unpublished Copyright © 2023 Leonard P. Wesley, Ian Chavez, and Shivam Amin
       All Rights Reserved
 
 ========================== MODIFICATION HISTORY ==============================
@@ -27,6 +27,13 @@ AUTHOR: Ian Chavez
     AUTHOR:  Ian Chavez
     COMMENT:
         - Title
+12/05/23:
+    MOD:     New Functionality
+    AUTHOR:  Shivam Amin
+    COMMENT:
+        - Called the two newly created python files:
+            - Tune_LRmodel.py
+            - Test_LRmodel.py
 ====================== END OF MODIFICATION HISTORY ============================
 """
 if __name__ == "__main__":
@@ -49,6 +56,8 @@ if __name__ == "__main__":
     exec(open("Dataset_editor.py").read())
     exec(open("Train_LRmodel.py").read())
     exec(open("Validate_LRmodel.py").read())
+    exec(open("Tune_LRmodel.py").read())
+    exec(open("Test_LRmodel.py").read())
     # Test model using testing dataset
     # Save model and performance to text file
     print("===== Done =====")

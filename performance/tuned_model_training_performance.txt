@@ -1,0 +1,7 @@
+Confusion Matrix:
+[[11  1]
+ [ 2  8]]
+Accuracy:
+0.8636363636363636
+Precision, Recall, F1:
+(0.8888888888888888, 0.8, 0.8421052631578948, None)
