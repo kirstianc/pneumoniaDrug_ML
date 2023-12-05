@@ -1,5 +1,6 @@
 Confusion Matrix:
-[[3]]
+[[3 0]
+ [0 4]]
 Accuracy:
 1.0
 Precision, Recall, F1:

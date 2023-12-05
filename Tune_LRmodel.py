@@ -40,9 +40,10 @@ from sklearn.model_selection import train_test_split
 print('Importing datasets...')
 training_dataset = pd.read_csv('datasets/training_dataset.csv')
 validation_dataset = pd.read_csv('datasets/validation_dataset.csv')
+testing_dataset = pd.read_csv('datasets/testing_dataset.csv')
 
 # Combine training and validation datasets for hyperparameter tuning
-combined_dataset = pd.concat([training_dataset, validation_dataset], ignore_index=True)
+combined_dataset = pd.concat([training_dataset, validation_dataset,testing_dataset], ignore_index=True)
 
 # Split into X and y
 print('Splitting into X and y...')
