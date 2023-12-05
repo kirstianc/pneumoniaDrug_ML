@@ -1,5 +1,5 @@
 Confusion Matrix:
-[[12  0]
+[[ 1  0]
  [ 0 10]]
 Accuracy Score: 1.0
 Precision, Recall, F1 Score, Support:

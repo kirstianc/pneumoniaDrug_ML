@@ -45,6 +45,7 @@ import requests
 from bs4 import BeautifulSoup
 import time
 import certifi
+import datetime
 
 # List of links to scrape
 list_working = []
@@ -96,7 +97,8 @@ def scrape_chemspider_links(working: bool, list_of_cslinks: list):
         time.sleep(.25)
 
 if __name__ == '__main__':
-    print("---- Starting Chemspider_scraper.py ----")
+    current_time = datetime.datetime.now().strftime("%H:%M:%S")
+    print(f"---- Starting Chemspider_scraper.py at {current_time} ----")
     
     print("Obtaining Working ChemSpider links...")
     list_working = obtain_chemspider_links(workinglink_file, list_working)
@@ -117,5 +119,6 @@ if __name__ == '__main__':
     
     print("Scraping Not Working SMILE data...")
     scrape_chemspider_links(False, list_notworking)
-    
-    print("---- Finished with Chemspider_scraper.py ----\n")
+
+    current_time = datetime.datetime.now().strftime("%H:%M:%S")
+    print(f"---- Finished with Chemspider_scraper.py at {current_time} ----")

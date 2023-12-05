@@ -1,0 +1,7 @@
+Confusion Matrix:
+[[ 1  0]
+ [ 0 10]]
+Accuracy:
+1.0
+Precision, Recall, F1:
+(1.0, 1.0, 1.0, None)

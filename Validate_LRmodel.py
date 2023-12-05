@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 import pickle
-from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_recall_fscore_support
 
 print('---- Starting Validate_LRmodel.py ----')
@@ -37,5 +36,5 @@ with open('performance/validation_performance.txt', 'w') as f:
     f.write(str(accuracy_score(y_val, y_pred)) + '\n')
     f.write('Precision, Recall, F1:\n')
     f.write(str(precision_recall_fscore_support(y_val, y_pred, average='binary')) + '\n')
-    
+
 print('---- Finished with Validate_LRmodel.py ----')
